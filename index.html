@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <canvas id="canvas" width="600" height="600"></canvas><br />
+        <button id="generate"type="button">Generate!</button>
+        <script type="module">
+            import init, { generate, query } from "./pkg/kdtree.js";
+            await init();
+
+            const canvas = document.getElementById("canvas");
+            document.getElementById("generate").addEventListener("click", () => {
+                generate();
+            });
+            canvas.addEventListener("click", (event) => {
+                const rect = canvas.getBoundingClientRect();
+                const x = (event.clientX - rect.left) * canvas.width / rect.width;
+                const y = (event.clientY - rect.top) * canvas.height / rect.height;
+                query(x, y);
+            });
+        </script>
+    </body>
+</html>
